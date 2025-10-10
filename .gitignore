@@ -1,0 +1,7 @@
+node_modules
+.dist
+.DS_Store
+*.log
+apps/**/dist
+packages/**/dist
+.storybook-out

@@ -1,0 +1,20 @@
+{
+  "name": "docs",
+  "private": true,
+  "type": "module",
+  "scripts": {
+    "dev": "storybook dev -p 6006",
+    "build": "storybook build"
+  },
+  "devDependencies": {
+    "@storybook/react-vite": "^8",
+    "storybook": "^8",
+    "typescript": "^5",
+    "vite": "^5"
+  },
+  "dependencies": {
+    "react": "^18",
+    "react-dom": "^18",
+    "@prisma-ui/core": "workspace:*"
+  }
+}

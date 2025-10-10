@@ -1,0 +1,22 @@
+{
+  "name": "prisma-ui",
+  "private": true,
+  "packageManager": "pnpm@10.18.0",
+  "scripts": {
+    "dev:sandbox": "pnpm --filter sandbox dev",
+    "build": "pnpm -r --filter ./packages... run build",
+    "clean": "rimraf packages/**/dist",
+    "typecheck": "tsc -p tsconfig.base.json --noEmit",
+    "changeset": "changeset",
+    "release": "changeset version && pnpm -r build && pnpm -r publish --access public"
+  },
+  "devDependencies": {
+    "@types/react": "^18",
+    "@types/react-dom": "^18",
+    "changesets": "^2",
+    "rimraf": "^5.0.0",
+    "typescript": "^5.9.3",
+    "vite": "^5",
+    "@vitejs/plugin-react": "^4"
+  }
+}
