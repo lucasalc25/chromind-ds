@@ -53,16 +53,17 @@ export function App() {
 
 ---
 
-## 🎨 Temas disponíveis
+## 🎨 Temas e Psicologia das Cores
 
-| Nicho       | Tema                   | Cor principal     |
-| ----------- | ---------------------- | ----------------- |
-| Brinquedos  | `toyShopTheme`         | Rosa vibrante     |
-| Pets        | `petShopTheme`         | Laranja quente    |
-| Roupas      | `clothingShopTheme`    | Preto minimalista |
-| Eletrônicos | `electronicsShopTheme` | Azul tecnológico  |
-| Farmácia    | `drugstoreShopTheme`   | Verde turquesa    |
-| Cursos      | `courseShopTheme`      | Amarelo acadêmico |
+Cada tema do Prisma UI foi desenvolvido com base na psicologia das cores aplicada ao marketing, alinhando a identidade visual de cada nicho à emoção ou percepção que deseja despertar nos consumidores:
+
+| Nicho        | Tema                 | Cor principal     | Psicologia da cor |
+|---------------|----------------------|-------------------|-------------------|
+| **Brinquedos** | `toyShopTheme`       | Rosa vibrante     | Transmite **alegria**, **imaginação** e **afeto**, estimulando o aspecto lúdico e criativo. |
+| **Pets**       | `petShopTheme`       | Laranja quente    | Representa **energia**, **acolhimento** e **entusiasmo**, reforçando o vínculo emocional com os animais. |
+| **Roupas**     | `clothingShopTheme`  | Preto minimalista | Evoca **elegância**, **sofisticação** e **exclusividade**, muito usado em marcas de moda e lifestyle. |
+| **Eletrônicos**| `electronicsShopTheme` | Azul tecnológico  | Expressa **confiança**, **precisão** e **modernidade**, características comuns em marcas de tecnologia. |
+| **Farmácia**   | `drugstoreShopTheme` | Verde turquesa    | Associa-se à **saúde**, **equilíbrio** e **bem-estar**, transmitindo **calma** e **credibilidade**. |
 
 ---
 
