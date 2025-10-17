@@ -1,6 +1,6 @@
 export type Typography = {
   fontFamily: string;
-  fontSizeBase: number; // px
+  fontSizeBase: number;
 };
 
 export const typography: Typography = {

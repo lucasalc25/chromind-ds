@@ -7,6 +7,12 @@ import {
   SearchBar,
   Breadcrumbs,
   Pagination,
+  Product,
+  CartSheet,
+  Toast,
+  ComponentsGallery,
+  ProductDetail,
+  BrandFilters,
 } from "@prisma-ui/sales";
 import {
   toyShopTheme,
@@ -17,9 +23,8 @@ import {
 } from "@prisma-ui/sales";
 import { products as catalog } from "./data/products";
 import { Page } from "./Page";
-import { BrandPriceFilters } from "@prisma-ui/sales";
+import { useBreakpoints } from "@prisma-ui/core";
 
-// === temas (niches) disponíveis no header ===
 const themes = {
   "toy-shop": toyShopTheme,
   "pet-shop": petShopTheme,
@@ -39,21 +44,47 @@ type FiltersState = {
 };
 
 export function App() {
-  // header
+  // Breakpoints
+  const bp = useBreakpoints();
+
+  const mainGridStyle: React.CSSProperties = {
+    display: "grid",
+    gap: 32,
+    gridTemplateColumns: bp.ltLg ? "1fr" : "260px 1fr",
+    marginTop: 32,
+  };
+
+  const headerControlsStyle: React.CSSProperties = {
+    display: "flex",
+    flexWrap: "wrap",
+    alignItems: "center",
+    gap: 16,
+  };
+
+  const paginationWrapStyle: React.CSSProperties = {
+    display: "flex",
+    alignItems: "center",
+    gap: 8,
+    flexWrap: "wrap",
+  };
+
+  // Hooks
   const [themeKey, setThemeKey] = useState<ThemeKey>("toy-shop");
   const [mode, setMode] = useState<"light" | "dark">("light");
+  const [view, setView] = useState<"catalog" | "product" | "components">(
+    "catalog"
+  );
+  const [selectedProduct, setSelectedProduct] = useState<Product | null>(null);
 
-  // busca e ordenação
   const [query, setQuery] = useState("");
   const [sortKey, setSortKey] = useState<SortKey>("popular");
 
-  // favoritos controlados no App
   const [favorites, setFavorites] = useState<Set<string>>(new Set());
   function handleFavoriteToggle(product: { id: string }) {
     setFavorites((prev) => {
       const next = new Set(prev);
       next.has(product.id) ? next.delete(product.id) : next.add(product.id);
-      return next; // imutável
+      return next;
     });
   }
 
@@ -65,7 +96,7 @@ export function App() {
     [themeKey]
   );
 
-  // 2) min/max do nicho atual (para slider)
+  // 2) min/max do nicho atual (slider)
   const [absMin, absMax] = useMemo(() => {
     if (!nicheProducts.length) return [0, 0];
     const prices = nicheProducts.map((p) => p.price);
@@ -84,14 +115,14 @@ export function App() {
     setQuery("");
   }, [themeKey, absMin, absMax]);
 
-  // 4) marcas disponíveis (inclui “Sem marca”)
+  // 4) marcas disponíveis
   const brandOptions = useMemo(() => {
     const set = new Set<string>();
     for (const p of nicheProducts) set.add(p.brand?.trim() || "Sem marca");
     return Array.from(set).sort((a, b) => a.localeCompare(b));
   }, [nicheProducts]);
 
-  // 5) sugestões de busca só do nicho atual
+  // 5) sugestões de busca do nicho atual
   const searchSuggestions = useMemo(
     () =>
       nicheProducts.map((product) => ({ id: product.id, label: product.name })),
@@ -129,7 +160,7 @@ export function App() {
       case "rating-desc":
         return [...list].sort((a, b) => b.rating - a.rating);
       default:
-        return list; // "popular" (sem ordenação extra)
+        return list;
     }
   }, [nicheProducts, query, filters, sortKey]);
 
@@ -145,6 +176,71 @@ export function App() {
     setPage(1);
   }, [query, sortKey, filters, themeKey]);
 
+  useEffect(() => {
+    window.scrollTo({ top: 0, behavior: "smooth" });
+  }, [page]);
+
+  function openProduct(p: Product) {
+    setSelectedProduct(p);
+    setView("product");
+  }
+
+  const crumbs = [
+    { id: "home", label: "Início", href: "/" },
+    view === "catalog"
+      ? { id: "catalog", label: "Catálogo" }
+      : view === "components"
+      ? { id: "components", label: "Componentes" }
+      : { id: "product", label: "Produto" },
+  ];
+
+  const [cartOpen, setCartOpen] = useState(false);
+  const [toastOpen, setToastOpen] = useState(false);
+  const [cartItems, setCartItems] = useState<
+    Array<{
+      id: string;
+      name: string;
+      price: number;
+      quantity: number;
+      image?: string;
+    }>
+  >([]);
+
+  // handlers
+  function handleAddToCart(product: Product, qty: number) {
+    setCartItems((prev) => {
+      const i = prev.findIndex((it) => it.id === product.id);
+      if (i >= 0) {
+        const next = [...prev];
+        next[i] = { ...next[i], quantity: next[i].quantity + qty };
+        return next;
+      }
+      return [
+        ...prev,
+        {
+          id: product.id,
+          name: product.name,
+          price: product.price,
+          quantity: qty,
+          image: product.images?.[0],
+        },
+      ];
+    });
+    setToastOpen(true);
+  }
+
+  function handleOpenCart() {
+    setCartOpen(true);
+  }
+  function handleCloseCart() {
+    setCartOpen(false);
+  }
+  function handleCloseToast() {
+    setToastOpen(false);
+  }
+
+  const subtotal = cartItems.reduce((s, it) => s + it.price * it.quantity, 0);
+
   return (
     <ThemeProvider theme={theme} mode={mode}>
       <div
@@ -156,26 +252,22 @@ export function App() {
         }}
       >
         <Page>
-          <Box style={{ maxWidth: 1200, margin: "0 auto", padding: 32 }}>
-            <Breadcrumbs
-              items={[
-                { id: "home", label: "Início", href: "#" },
-                { id: "catalog", label: "Catálogo" },
-              ]}
-            />
-
+          <Box style={{ maxWidth: 1536, margin: "0 auto", padding: 20 }}>
             {/* HEADER */}
             <header style={{ display: "grid", gap: 16, marginTop: 16 }}>
               <Text style={{ fontSize: 28, fontWeight: 800 }}>Prisma UI</Text>
 
-              <div
-                style={{
-                  display: "flex",
-                  flexWrap: "wrap",
-                  alignItems: "center",
-                  gap: 16,
-                }}
-              >
+              <div style={headerControlsStyle}>
+                <label>
+                  Visualização:{" "}
+                  <select
+                    value={view}
+                    onChange={(e) => setView(e.target.value as any)}
+                  >
+                    <option value="catalog">Catálogo</option>
+                    <option value="components">Componentes</option>
+                  </select>
+                </label>
                 <label>
                   Tema:{" "}
                   <select
@@ -210,60 +302,134 @@ export function App() {
                 onSearch={(value) => setQuery(value)}
                 suggestions={searchSuggestions}
               />
+
+              <Breadcrumbs items={crumbs} />
             </header>
 
-            {/* LAYOUT: filtros à esquerda, grid à direita */}
-            <main
-              style={{
-                display: "grid",
-                gap: 32,
-                gridTemplateColumns: "260px 1fr",
-                marginTop: 32,
-              }}
-            >
-              <aside>
-                <BrandPriceFilters
-                  brands={brandOptions}
-                  selectedBrands={filters.brands}
-                  onChangeBrands={(brands) =>
-                    setFilters((f) => ({ ...f, brands }))
-                  }
-                  minLimit={absMin}
-                  maxLimit={absMax}
-                  value={[
-                    filters.minPrice ?? absMin,
-                    filters.maxPrice ?? absMax,
-                  ]}
-                  onChangeValue={([min, max]) =>
-                    setFilters((f) => ({ ...f, minPrice: min, maxPrice: max }))
-                  }
-                  onClear={() =>
-                    setFilters({
-                      brands: [],
-                      minPrice: absMin,
-                      maxPrice: absMax,
-                    })
-                  }
-                />
-              </aside>
+            {view === "catalog" && (
+              <main style={mainGridStyle}>
+                <aside style={{ marginInline: "auto", width: 260 }}>
+                  <BrandFilters
+                    brands={brandOptions}
+                    selectedBrands={filters.brands}
+                    onChangeBrands={(brands) =>
+                      setFilters((f) => ({ ...f, brands }))
+                    }
+                    minLimit={absMin}
+                    maxLimit={absMax}
+                    value={[
+                      filters.minPrice ?? absMin,
+                      filters.maxPrice ?? absMax,
+                    ]}
+                    onChangeValue={([min, max]) =>
+                      setFilters((f) => ({
+                        ...f,
+                        minPrice: min,
+                        maxPrice: max,
+                      }))
+                    }
+                    onClear={() =>
+                      setFilters({
+                        brands: [],
+                        minPrice: absMin,
+                        maxPrice: absMax,
+                      })
+                    }
+                  />
+                </aside>
 
-              <section style={{ display: "grid", gap: 24 }}>
-                <SortSelect value={sortKey} onChange={setSortKey} />
+                <section style={{ display: "grid", gap: 24 }}>
+                  <div
+                    style={{
+                      display: "flex",
+                      justifyContent: "end",
+                      maxWidth: 300,
+                    }}
+                  >
+                    <SortSelect value={sortKey} onChange={setSortKey} />
+                  </div>
 
-                {/* GRID: recebe favoritos + callback */}
-                <ProductGrid
-                  products={pageProducts}
-                  favorites={favorites} // Set<string> com ids
-                  onFavoriteToggle={handleFavoriteToggle}
+                  <ProductGrid
+                    products={pageProducts}
+                    favorites={favorites}
+                    onFavoriteToggle={handleFavoriteToggle}
+                    onProductClick={openProduct}
+                    onAddToCart={(p, q) => handleAddToCart(p, q)}
+                  />
+
+                  <div style={paginationWrapStyle}>
+                    <Pagination
+                      page={page}
+                      totalPages={totalPages}
+                      onPageChange={setPage}
+                    />
+                  </div>
+                </section>
+                <CartSheet
+                  isOpen={cartOpen}
+                  onClose={handleCloseCart}
+                  title="Seu carrinho"
+                  items={cartItems}
+                  subtotal={subtotal}
+                  onCheckout={() => {
+                    /* ... */
+                  }}
+                  onRemoveItem={(id) =>
+                    setCartItems((prev) => prev.filter((i) => i.id !== id))
+                  }
+                  side="right"
+                  width={400}
                 />
 
-                <Pagination
-                  page={page}
-                  totalPages={totalPages}
-                  onPageChange={setPage}
+                <Toast
+                  open={toastOpen}
+                  onClose={handleCloseToast}
+                  title="Item adicionado"
+                  description="Produto colocado no carrinho."
+                  tone="success"
+                  autoDismiss={5000}
+                  action={{ label: "Ver carrinho", onClick: handleOpenCart }}
                 />
-              </section>
-            </main>
+              </main>
+            )}
+
+            {view === "product" && selectedProduct && (
+              <main>
+                <ProductDetail
+                  product={selectedProduct}
+                  isFavorite={favorites.has(selectedProduct.id)}
+                  onFavoriteToggle={() => handleFavoriteToggle(selectedProduct)}
+                  onAddToCart={(p, q) => handleAddToCart(p, q)}
+                />
+                <CartSheet
+                  isOpen={cartOpen}
+                  onClose={handleCloseCart}
+                  title="Seu carrinho"
+                  items={cartItems}
+                  subtotal={subtotal}
+                  onCheckout={() => {
+                    /* ... */
+                  }}
+                  onRemoveItem={(id) =>
+                    setCartItems((prev) => prev.filter((i) => i.id !== id))
+                  }
+                  side="right"
+                  width={400}
+                />
+
+                <Toast
+                  open={toastOpen}
+                  onClose={handleCloseToast}
+                  title="Item adicionado"
+                  description="Produto colocado no carrinho."
+                  tone="success"
+                  autoDismiss={5000}
+                  action={{ label: "Ver carrinho", onClick: handleOpenCart }}
+                />
+              </main>
+            )}
+
+            {view === "components" && <ComponentsGallery />}
           </Box>
         </Page>
       </div>

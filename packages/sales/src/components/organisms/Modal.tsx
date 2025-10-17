@@ -1,9 +1,7 @@
 import React, { useEffect } from "react";
 import { createPortal } from "react-dom";
-import { useTheme } from "@prisma-ui/core";
+import { useTheme, hexToRgba, transition } from "@prisma-ui/core";
 import { Button } from "../atoms/Button";
-import { hexToRgba } from "../../utils/color";
-import { transition } from "../../utils/style";
 
 export type ModalProps = {
   isOpen: boolean;
@@ -23,7 +21,13 @@ const ensureContainer = () => {
   return container;
 };
 
-export function Modal({ isOpen, onClose, title, children, footer }: ModalProps) {
+export function Modal({
+  isOpen,
+  onClose,
+  title,
+  children,
+  footer,
+}: ModalProps) {
   const { colors, radii, spacing, typography } = useTheme();
 
   useEffect(() => {

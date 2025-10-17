@@ -1,7 +1,4 @@
-import React from "react";
-import { useTheme } from "@prisma-ui/core";
-import { hexToRgba } from "../../utils/color";
-import { transition } from "../../utils/style";
+import { useTheme, hexToRgba, transition } from "@prisma-ui/core";
 
 export type VariantOption = {
   id: string;
@@ -92,8 +89,14 @@ export function VariantSelector({
                       : colors.text,
                     padding: `${spacing(1.5)} ${spacing(2.5)}`,
                     cursor: isDisabled ? "not-allowed" : "pointer",
-                    transition: transition(["background", "border", "transform"]),
-                    transform: isSelected ? "translateY(-1px)" : "translateY(0)",
+                    transition: transition([
+                      "background",
+                      "border",
+                      "transform",
+                    ]),
+                    transform: isSelected
+                      ? "translateY(-1px)"
+                      : "translateY(0)",
                     opacity: isDisabled ? 0.6 : 1,
                     textAlign: "left" as const,
                   }}

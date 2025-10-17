@@ -1,7 +1,5 @@
 import React from "react";
-import { useTheme } from "@prisma-ui/core";
-import { hexToRgba } from "../../utils/color";
-import { transition } from "../../utils/style";
+import { useTheme, hexToRgba, transition } from "@prisma-ui/core";
 
 export type TabItem = {
   id: string;

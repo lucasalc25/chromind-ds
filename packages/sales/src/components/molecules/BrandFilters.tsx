@@ -1,6 +1,7 @@
 import React from "react";
 import { useTheme } from "@prisma-ui/core";
 import { spacing, typography } from "@prisma-ui/core";
+import { Button } from "../atoms/Button";
 
 type Props = {
   brands: string[];
@@ -15,7 +16,7 @@ type Props = {
   onClear?: () => void;
 };
 
-export const BrandPriceFilters: React.FC<Props> = ({
+export const BrandFilters: React.FC<Props> = ({
   brands,
   selectedBrands,
   onChangeBrands,
@@ -28,7 +29,6 @@ export const BrandPriceFilters: React.FC<Props> = ({
   const { colors } = useTheme();
   const [min, max] = value;
 
-  // slider handlers
   const onMinChange = (e: React.ChangeEvent<HTMLInputElement>) => {
     const newMin = Math.min(Number(e.target.value), max - 1);
     onChangeValue([newMin, max]);
@@ -63,6 +63,7 @@ export const BrandPriceFilters: React.FC<Props> = ({
         fontFamily: typography.fontFamily,
         display: "grid",
         gap: spacing(4),
+        maxWidth: 320,
       }}
     >
       <style>{`
@@ -73,21 +74,21 @@ export const BrandPriceFilters: React.FC<Props> = ({
         }
         .range::-webkit-slider-thumb {
           -webkit-appearance: none; appearance: none;
-          width: 16px; height: 16px; border-radius: 50%;
+          width: 20px; height: 20px; border-radius: 50%;
           background: var(--thumb-bg); border: 2px solid var(--thumb-border);
           pointer-events: all;
         }
         .range::-moz-range-thumb {
-          width: 16px; height: 16px; border-radius: 50%;
+          width: 20px; height: 20px; border-radius: 50%;
           background: var(--thumb-bg); border: 2px solid var(--thumb-border);
           pointer-events: all;
         }
         .track {
-          position: absolute; top: 20px; left: 0; right: 0; height: 4px;
+          position: absolute; top: 22px; left: 0; right: 0; height: 4px;
           border-radius: 999px; background: var(--track-bg);
         }
         .track-fill {
-          position: absolute; top: 20px; height: 4px;
+          position: absolute; top: 22px; height: 4px;
           border-radius: 999px; background: var(--track-fill);
           left: var(--left, 0%); right: calc(100% - var(--right, 100%));
         }
@@ -182,21 +183,9 @@ export const BrandPriceFilters: React.FC<Props> = ({
         </div>
       </section>
 
-      <button
-        type="button"
-        onClick={onClear}
-        style={{
-          marginTop: spacing(1),
-          padding: "8px 12px",
-          borderRadius: 8,
-          border: `1px solid ${colors.border}`,
-          background: "transparent",
-          color: colors.text,
-          cursor: "pointer",
-        }}
-      >
-        Limpar filtros
-      </button>
+      <Button onClick={onClear} tone="brand" variant="outline">
+        Limpar Filtros
+      </Button>
     </div>
   );
 };

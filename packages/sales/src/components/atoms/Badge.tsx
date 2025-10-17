@@ -1,8 +1,12 @@
-import React from "react";
-import { useTheme } from "@prisma-ui/core";
-import { hexToRgba } from "../../utils/color";
+import { useTheme, hexToRgba } from "@prisma-ui/core";
 
-type BadgeTone = "brand" | "accent" | "neutral" | "success" | "warning" | "danger";
+type BadgeTone =
+  | "brand"
+  | "accent"
+  | "neutral"
+  | "success"
+  | "warning"
+  | "danger";
 type BadgeVariant = "solid" | "subtle" | "outline";
 type BadgeSize = "sm" | "md";
 
@@ -14,7 +18,10 @@ export type BadgeProps = {
   icon?: React.ReactNode;
 };
 
-const SIZE_MAP: Record<BadgeSize, { inset: [number, number]; fontSize: number }> = {
+const SIZE_MAP: Record<
+  BadgeSize,
+  { inset: [number, number]; fontSize: number }
+> = {
   sm: { inset: [1, 2], fontSize: 11 },
   md: { inset: [1.5, 2.5], fontSize: 12 },
 };

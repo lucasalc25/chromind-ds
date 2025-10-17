@@ -7,14 +7,12 @@
     "build": "storybook build"
   },
   "devDependencies": {
-    "@storybook/react-vite": "^8",
-    "storybook": "^8",
     "typescript": "^5",
     "vite": "^5"
   },
   "dependencies": {
+    "@prisma-ui/core": "workspace:*",
     "react": "^18",
-    "react-dom": "^18",
-    "@prisma-ui/core": "workspace:*"
+    "react-dom": "^18"
   }
 }

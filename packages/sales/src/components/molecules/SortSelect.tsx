@@ -1,7 +1,10 @@
-import React, { useState } from "react";
-import { useTheme } from "@prisma-ui/core";
-import { hexToRgba } from "../../utils/color";
-import { buildFocusRing, transition } from "../../utils/style";
+import { useState } from "react";
+import {
+  useTheme,
+  hexToRgba,
+  buildFocusRing,
+  transition,
+} from "@prisma-ui/core";
 
 export type SortKey = "popular" | "price-asc" | "price-desc" | "rating-desc";
 
@@ -19,15 +22,15 @@ export function SortSelect({ value, onChange, label }: SortSelectProps) {
   return (
     <label
       style={{
-        display: "inline-flex",
-        flexDirection: "column",
-        gap: spacing(1),
+        display: "flex",
+        alignItems: "center",
+        gap: spacing(2),
         fontFamily: typography.fontFamily,
-        color: colors.mutedText,
-        fontSize: 12,
+        color: colors.text,
+        fontSize: 14,
       }}
     >
-      {label ?? "Ordenar por"}
+      {label ?? "Ordenar por:"}
       <select
         value={value}
         onChange={(event) => onChange(event.target.value as SortKey)}
@@ -36,7 +39,6 @@ export function SortSelect({ value, onChange, label }: SortSelectProps) {
         onMouseEnter={() => setHovered(true)}
         onMouseLeave={() => setHovered(false)}
         style={{
-          appearance: "none",
           borderRadius: radii.md,
           border: `1px solid ${hexToRgba(colors.border, hovered ? 0.9 : 0.8)}`,
           padding: `${spacing(2)} ${spacing(6)} ${spacing(2)} ${spacing(3)}`,

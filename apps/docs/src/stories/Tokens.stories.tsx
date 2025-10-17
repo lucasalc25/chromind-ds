@@ -1,4 +1,3 @@
-import React from "react";
 import { neutralColors, radii, spacing, typography } from "@prisma-ui/core";
 
 export default { title: "Core/Tokens" };

@@ -10,6 +10,7 @@ export const Text: React.FC<TextProps> = ({ style, children }) => {
       style={{
         color: colors.text,
         fontSize: typography.fontSizeBase,
+        fontFamily: typography.fontFamily,
         ...style,
       }}
     >

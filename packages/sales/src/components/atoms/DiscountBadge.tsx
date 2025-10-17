@@ -1,6 +1,4 @@
-import React from "react";
-import { useTheme } from "@prisma-ui/core";
-import { hexToRgba } from "../../utils/color";
+import { useTheme, hexToRgba } from "@prisma-ui/core";
 
 type DiscountBadgeProps = {
   percent: number;
@@ -23,10 +21,10 @@ export function DiscountBadge({ percent }: DiscountBadgeProps) {
         background,
         color: colors.brand,
         borderRadius: radii.pill,
-        padding: `${spacing(0.75)} ${spacing(1.75)}`,
+        padding: `${spacing(1)} ${spacing(2)}`,
         fontWeight: 700,
-        fontSize: 12,
-        letterSpacing: "0.08em",
+        fontSize: 13,
+        letterSpacing: "0.06em",
         textTransform: "uppercase",
         border: `1px solid ${border}`,
         boxShadow: shadow,

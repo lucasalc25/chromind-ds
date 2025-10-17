@@ -1,7 +1,10 @@
-import React, { useState } from "react";
-import { useTheme } from "@prisma-ui/core";
-import { hexToRgba } from "../../utils/color";
-import { buildFocusRing, transition } from "../../utils/style";
+import { useState } from "react";
+import {
+  useTheme,
+  hexToRgba,
+  buildFocusRing,
+  transition,
+} from "@prisma-ui/core";
 
 type QuantityStepperProps = {
   value: number;

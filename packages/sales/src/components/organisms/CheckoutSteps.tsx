@@ -1,6 +1,4 @@
-import React from "react";
-import { useTheme } from "@prisma-ui/core";
-import { hexToRgba } from "../../utils/color";
+import { useTheme, hexToRgba } from "@prisma-ui/core";
 
 export type CheckoutStepStatus = "complete" | "current" | "upcoming";
 
@@ -56,11 +54,11 @@ export function CheckoutSteps({ steps }: CheckoutStepsProps) {
                 aria-hidden
                 style={{
                   position: "absolute",
-                  left: spacing(3),
-                  top: "calc(100% - 4px)",
+                  left: spacing(5),
+                  top: "100%",
                   width: 2,
-                  height: spacing(6),
-                  background: hexToRgba(colors.border, 0.6),
+                  height: spacing(4),
+                  background: hexToRgba(colors.border, 0.8),
                 }}
               />
             )}
@@ -81,6 +79,7 @@ export function CheckoutSteps({ steps }: CheckoutStepsProps) {
                   borderRadius: "50%",
                   background: hexToRgba(tone, 0.18),
                   color: tone,
+                  fontSize: typography.fontSizeBase - 2,
                   fontWeight: 600,
                 }}
               >

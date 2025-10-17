@@ -1,7 +1,5 @@
 import React, { useRef, useState } from "react";
-import { useTheme } from "@prisma-ui/core";
-import { hexToRgba } from "../../utils/color";
-import { transition } from "../../utils/style";
+import { useTheme, hexToRgba, transition } from "@prisma-ui/core";
 
 type TooltipPlacement = "top" | "bottom" | "left" | "right";
 
@@ -39,14 +37,34 @@ export function Tooltip({
     };
     switch (placement) {
       case "bottom":
-        return { ...base, top: `calc(100% + ${offset})`, left: "50%", transform: "translateX(-50%)" };
+        return {
+          ...base,
+          top: `calc(100% + ${offset})`,
+          left: "50%",
+          transform: "translateX(-50%)",
+        };
       case "left":
-        return { ...base, right: `calc(100% + ${offset})`, top: "50%", transform: "translateY(-50%)" };
+        return {
+          ...base,
+          right: `calc(100% + ${offset})`,
+          top: "50%",
+          transform: "translateY(-50%)",
+        };
       case "right":
-        return { ...base, left: `calc(100% + ${offset})`, top: "50%", transform: "translateY(-50%)" };
+        return {
+          ...base,
+          left: `calc(100% + ${offset})`,
+          top: "50%",
+          transform: "translateY(-50%)",
+        };
       case "top":
       default:
-        return { ...base, bottom: `calc(100% + ${offset})`, left: "50%", transform: "translateX(-50%)" };
+        return {
+          ...base,
+          bottom: `calc(100% + ${offset})`,
+          left: "50%",
+          transform: "translateX(-50%)",
+        };
     }
   };
 

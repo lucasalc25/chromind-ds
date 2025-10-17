@@ -4,19 +4,21 @@ import { Heart } from "lucide-react";
 type FavoriteButtonProps = {
   isFavorite: boolean;
   onToggle: () => void;
-  size?: number; // px do ícone
-  ariaLabelAdd?: string; // acessibilidade
+  size?: number;
+  ariaLabelAdd?: string;
   ariaLabelRemove?: string;
+  fontScale?: number;
 };
 
 export function FavoriteButton({
   isFavorite,
   onToggle,
-  size = 20,
+  size = 24,
   ariaLabelAdd = "Adicionar aos favoritos",
   ariaLabelRemove = "Remover dos favoritos",
+  fontScale = 1,
 }: FavoriteButtonProps) {
-  const { colors, spacing } = useTheme();
+  const { colors, spacing, transition } = useTheme();
   const label = isFavorite ? ariaLabelRemove : ariaLabelAdd;
 
   return (
@@ -26,16 +28,22 @@ export function FavoriteButton({
       aria-pressed={isFavorite}
       aria-label={label}
       style={{
-        border: "transparent",
-        width: 20,
-        height: 20,
-        padding: spacing(0),
+        border: `${colors.brand}`,
+        width: 24 * fontScale,
+        height: 24 * fontScale,
+        marginRight: spacing(1),
         background: "transparent",
-        transition: "all 160ms ease",
+        transition:
+          transition?.transition?.(["transform", "box-shadow", "border"]) ??
+          "all .16s ease",
         cursor: "pointer",
       }}
     >
-      <Heart size={size} fill={isFavorite ? colors.brand : "none"} />
+      <Heart
+        size={size * fontScale}
+        fill={isFavorite ? colors.brand : "none"}
+        color={colors.brand}
+      />
     </button>
   );
 }

@@ -1,6 +1,4 @@
-import React from "react";
-import { useTheme } from "@prisma-ui/core";
-import { hexToRgba } from "../../utils/color";
+import { useTheme, hexToRgba } from "@prisma-ui/core";
 
 export type BreadcrumbItem = {
   id: string;
@@ -14,10 +12,7 @@ export type BreadcrumbsProps = {
   separator?: string;
 };
 
-export function Breadcrumbs({
-  items,
-  separator = "/",
-}: BreadcrumbsProps) {
+export function Breadcrumbs({ items, separator = "/" }: BreadcrumbsProps) {
   const { colors, spacing, typography } = useTheme();
 
   return (
@@ -32,9 +27,9 @@ export function Breadcrumbs({
           margin: 0,
           padding: 0,
           fontFamily: typography.fontFamily,
-          fontSize: 13,
         }}
       >
+        <span>{"Você está em:"}</span>
         {items.map((item, index) => {
           const isLast = index === items.length - 1;
           const content = item.href ? (
@@ -42,14 +37,12 @@ export function Breadcrumbs({
               href={item.href}
               onClick={item.onClick}
               style={{
-                color: isLast ? colors.text : colors.mutedText,
+                color: isLast ? colors.brand : colors.text,
                 textDecoration: "none",
                 fontWeight: isLast ? 600 : 500,
                 padding: `${spacing(0.5)} ${spacing(1)}`,
                 borderRadius: spacing(1),
-                background: isLast
-                  ? hexToRgba(colors.brandAccent, 0.18)
-                  : "transparent",
+                fontSize: "1rem",
               }}
             >
               {item.label}
@@ -60,14 +53,13 @@ export function Breadcrumbs({
               onClick={item.onClick}
               style={{
                 border: "none",
-                background: isLast
-                  ? hexToRgba(colors.brandAccent, 0.18)
-                  : "transparent",
-                color: isLast ? colors.text : colors.mutedText,
+                color: isLast ? colors.brand : colors.text,
+                fontSize: "1rem",
                 fontWeight: isLast ? 600 : 500,
                 cursor: item.onClick ? "pointer" : "default",
                 padding: `${spacing(0.5)} ${spacing(1)}`,
                 borderRadius: spacing(1),
+                background: "transparent",
               }}
             >
               {item.label}
@@ -75,12 +67,18 @@ export function Breadcrumbs({
           );
 
           return (
-            <li key={item.id} style={{ display: "inline-flex", gap: spacing(1) }}>
+            <li
+              key={item.id}
+              style={{ display: "inline-flex", gap: spacing(1) }}
+            >
               {content}
               {!isLast && (
                 <span
                   aria-hidden
-                  style={{ color: hexToRgba(colors.border, 0.9), fontWeight: 400 }}
+                  style={{
+                    color: hexToRgba(colors.mutedText, 0.9),
+                    fontWeight: 600,
+                  }}
                 >
                   {separator}
                 </span>

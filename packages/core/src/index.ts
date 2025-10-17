@@ -1,4 +1,7 @@
 export * from "./tokens";
+export * from "./utils/color";
+export * from "./utils/style";
+export * from "./hooks/useBreakpoints";
 export * from "./theme/createTheme";
 export * from "./theme/ThemeProvider";
 export * from "./theme/useTheme";

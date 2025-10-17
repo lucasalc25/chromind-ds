@@ -1,20 +1,21 @@
-import { typography, useTheme } from "@prisma-ui/core";
-import { hexToRgba } from "../../utils/color";
+import { useTheme } from "@prisma-ui/core";
 
 type RatingStarsProps = {
-  rating: number; // 0 - 5
+  rating: number;
   size?: number;
   readOnly?: boolean;
   avaliations?: number;
+  fontScale?: number;
 };
 
 const MAX_STARS = 5;
 
 export function RatingStars({
   rating,
-  size = 16,
+  size = 18,
   readOnly = true,
   avaliations,
+  fontScale = 1,
 }: RatingStarsProps) {
   const { colors, spacing } = useTheme();
 
@@ -40,8 +41,8 @@ export function RatingStars({
             key={index}
             aria-hidden
             style={{
-              fontSize: size,
-              lineHeight: 1,
+              fontSize: size * fontScale,
+              lineHeight: fontScale,
               color: isFilled ? colorOn : colorOff,
               transition: "transform 120ms ease",
               cursor: readOnly ? "default" : "pointer",
@@ -55,7 +56,7 @@ export function RatingStars({
         <span
           style={{
             color: colors.brand,
-            fontSize: size - 4,
+            fontSize: (size - 4) * fontScale,
             marginLeft: spacing(0.5),
             userSelect: "none",
           }}

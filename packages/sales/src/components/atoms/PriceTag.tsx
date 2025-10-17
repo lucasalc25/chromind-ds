@@ -1,11 +1,12 @@
 import { useTheme } from "@prisma-ui/core";
-import { hexToRgba } from "../../utils/color";
+import { DiscountBadge } from "./DiscountBadge";
 
 type PriceTagProps = {
   price: number;
   originalPrice?: number;
   installments?: number;
   pixLabel?: string;
+  fontScale?: number;
 };
 
 export function PriceTag({
@@ -13,11 +14,13 @@ export function PriceTag({
   originalPrice,
   installments = 10,
   pixLabel = "À vista no PIX",
+  fontScale = 1,
 }: PriceTagProps) {
-  const { colors, radii, spacing, typography } = useTheme();
+  const { colors, spacing, typography } = useTheme();
 
   const hasDiscount =
     typeof originalPrice === "number" && originalPrice > price;
+
   const formattedPrice = price.toLocaleString("pt-BR", {
     style: "currency",
     currency: "BRL",
@@ -33,18 +36,20 @@ export function PriceTag({
     <div
       style={{
         display: "grid",
-        gap: spacing(1.5),
+        gap: `calc(${spacing(1.5)} * ${fontScale})`,
         border: "none",
-        padding: spacing(1),
+        padding: `calc(${spacing(1)} * ${fontScale})`,
         minWidth: spacing(40),
+        fontFamily: typography.fontFamily,
       }}
     >
+      {/* Preço principal */}
       <div style={{ display: "grid" }}>
         {hasDiscount && (
           <span
             style={{
               color: colors.mutedText,
-              fontSize: 14,
+              fontSize: 14 * fontScale,
               textDecoration: "line-through",
               fontWeight: 500,
             }}
@@ -52,26 +57,41 @@ export function PriceTag({
             {formattedOriginal}
           </span>
         )}
-        <strong
+
+        <div
           style={{
             display: "flex",
-            alignItems: "flex-start",
-            background: "transparent",
-            color: colors.brand,
-            fontSize: 24,
-            fontWeight: 700,
-            letterSpacing: "-0.02em",
-            fontFamily: typography.fontFamily,
+            alignItems: "center",
+            gap: `calc(${spacing(3)} * ${fontScale})`,
           }}
         >
-          {formattedPrice}
-        </strong>
+          <strong
+            style={{
+              background: "transparent",
+              color: colors.brand,
+              fontSize: 24 * fontScale,
+              fontWeight: 700,
+              letterSpacing: "-0.02em",
+              lineHeight: 1.2,
+            }}
+          >
+            {formattedPrice}
+          </strong>
+
+          {hasDiscount && (
+            <DiscountBadge
+              percent={Math.round(100 - (price / originalPrice!) * 100)}
+            />
+          )}
+        </div>
       </div>
+
+      {/* Parcelas e Pix */}
       <div style={{ display: "grid" }}>
         <span
           style={{
             color: colors.text,
-            fontSize: 13,
+            fontSize: 13 * fontScale,
             fontWeight: 500,
             lineHeight: 1.4,
           }}
@@ -81,10 +101,11 @@ export function PriceTag({
             {hasDiscount ? "desconto especial" : "melhor preço"}
           </b>
         </span>
+
         <span
           style={{
             color: colors.mutedText,
-            fontSize: 12,
+            fontSize: 12 * fontScale,
             lineHeight: 1.5,
           }}
         >

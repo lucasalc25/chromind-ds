@@ -1,33 +1,55 @@
-import React, { useState } from "react";
-import { useTheme } from "@prisma-ui/core";
-import { hexToRgba } from "../../utils/color";
-import { transition } from "../../utils/style";
+import { useState } from "react";
+import { useTheme, hexToRgba } from "@prisma-ui/core";
+import { Button } from "../atoms/Button";
+import { ChevronLeft, ChevronRight } from "lucide-react";
+import { useBreakpoints } from "@prisma-ui/core";
 
-export type GalleryImage = {
-  id: string;
-  src: string;
-  alt?: string;
-};
+export type GalleryImage = { id: string; src: string; alt?: string };
 
 export type ProductGalleryProps = {
   images: GalleryImage[];
   aspectRatio?: string;
+  activeIndex?: number;
+  onChangeIndex?: (index: number) => void;
+  showNav?: boolean;
 };
 
 export function ProductGallery({
   images,
   aspectRatio = "4 / 3",
+  activeIndex,
+  onChangeIndex,
+  showNav = true,
 }: ProductGalleryProps) {
-  const { colors, radii, spacing } = useTheme();
-  const [activeIndex, setActiveIndex] = useState(0);
+  const { ltMd } = useBreakpoints();
+  const thumbSize = ltMd ? 56 : 64;
 
-  const activeImage = images[activeIndex];
+  const { colors, radii, spacing } = useTheme();
+
+  const [internalIndex, setInternalIndex] = useState(0);
+  const isControlled = typeof activeIndex === "number";
+  const index = isControlled
+    ? Math.max(0, Math.min(images.length - 1, activeIndex!))
+    : internalIndex;
+
+  const setIndex = (i: number) => {
+    const next = Math.max(0, Math.min(images.length - 1, i));
+    if (isControlled) onChangeIndex?.(next);
+    else setInternalIndex(next);
+  };
+
+  const prev = () => setIndex(index - 1);
+  const next = () => setIndex(index + 1);
+
+  const active = images[index];
 
   return (
     <div
       style={{
         display: "grid",
         gap: spacing(3),
+        alignItems: "start",
+        alignSelf: "start",
       }}
     >
       <div
@@ -38,79 +60,107 @@ export function ProductGallery({
           overflow: "hidden",
           background: hexToRgba(colors.surface, 0.96),
           padding: spacing(2),
+          width: "100%",
+          alignSelf: "start",
         }}
       >
         <div
           style={{
-            position: "relative",
-            width: "100%",
-            aspectRatio,
+            border: `1px solid ${colors.border}`,
+            borderRadius: radii.lg,
             overflow: "hidden",
-            borderRadius: radii.md,
-            background: hexToRgba(colors.surface, 1),
+            aspectRatio,
             display: "flex",
             alignItems: "center",
             justifyContent: "center",
+            background: colors.surface,
+            width: "100%",
           }}
         >
-          {activeImage ? (
+          {active ? (
             <img
-              src={activeImage.src}
-              alt={activeImage.alt ?? "Imagem do produto"}
-              style={{
-                width: "100%",
-                height: "100%",
-                objectFit: "contain",
-              }}
+              src={active.src}
+              alt={active.alt ?? ""}
+              style={{ width: "100%", height: "100%", objectFit: "cover" }}
             />
           ) : (
-            <span style={{ color: colors.mutedText }}>Imagem indisponível</span>
+            <span style={{ color: colors.mutedText }}>Sem imagem</span>
           )}
         </div>
       </div>
-      <div
-        style={{
-          display: "flex",
-          gap: spacing(2),
-          overflowX: "auto",
-          paddingBottom: spacing(1),
-        }}
-      >
-        {images.map((image, index) => {
-          const isActive = index === activeIndex;
-          return (
-            <button
-              key={image.id}
-              type="button"
-              onClick={() => setActiveIndex(index)}
-              style={{
-                borderRadius: radii.md,
-                border: `2px solid ${hexToRgba(
-                  colors.brandAccent,
-                  isActive ? 0.7 : 0.3
-                )}`,
-                background: hexToRgba(colors.surface, 0.9),
-                padding: spacing(1),
-                minWidth: spacing(20),
-                cursor: "pointer",
-                transition: transition(["border", "transform"]),
-                transform: isActive ? "translateY(-2px)" : "translateY(0)",
-              }}
-            >
-              <img
-                src={image.src}
-                alt={image.alt ?? "Miniatura do produto"}
+
+      {images.length > 1 && (
+        <div
+          style={{
+            display: "flex",
+            gap: spacing(1),
+            justifyContent: "center",
+            overflowX: "auto",
+            WebkitOverflowScrolling: "touch",
+            alignSelf: "start",
+          }}
+        >
+          {images.map((img, i) => {
+            const selected = i === index;
+            return (
+              <button
+                key={img.id}
+                type="button"
+                onClick={() => setIndex(i)}
+                aria-current={selected ? "true" : undefined}
                 style={{
-                  width: "100%",
-                  height: spacing(16),
-                  objectFit: "cover",
-                  borderRadius: radii.sm,
+                  border: `2px solid ${
+                    selected ? colors.brand : colors.border
+                  }`,
+                  padding: 0,
+                  borderRadius: radii.md,
+                  overflow: "hidden",
+                  width: thumbSize,
+                  height: thumbSize,
+                  flex: "0 0 auto",
+                  cursor: "pointer",
+                  background: "transparent",
                 }}
-              />
-            </button>
-          );
-        })}
-      </div>
+              >
+                <img
+                  src={img.src}
+                  alt={img.alt ?? ""}
+                  style={{ width: "100%", height: "100%", objectFit: "cover" }}
+                />
+              </button>
+            );
+          })}
+        </div>
+      )}
+
+      {showNav && images.length > 1 && (
+        <div
+          style={{
+            display: "flex",
+            justifyContent: "center",
+            gap: 8,
+            marginTop: 8,
+            alignSelf: "start",
+          }}
+        >
+          <Button
+            type="button"
+            onClick={prev}
+            disabled={index === 0}
+            variant="outline"
+          >
+            <ChevronLeft />
+          </Button>
+          <Button
+            type="button"
+            onClick={next}
+            disabled={index === images.length - 1}
+            variant="outline"
+          >
+            <ChevronRight />
+          </Button>
+        </div>
+      )}
     </div>
   );
 }

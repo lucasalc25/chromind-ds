@@ -8,13 +8,24 @@ export type ThemeColors = NeutralColors & {
   brandAccent: string;
 };
 
+export type TransitionTokens = {
+  transition: (
+    props: string | string[],
+    duration?: string,
+    easing?: string
+  ) => string;
+  durations: { fast: string; normal: string; slow: string };
+  easing: { standard: string; emphasized: string };
+};
+
 export type ThemeTokens = {
   colors: ThemeColors;
   radii: Radii;
   spacing: SpacingFn;
   typography: Typography;
+  transition?: TransitionTokens;
   modes?: {
-    dark?: Partial<Omit<ThemeTokens, "modes">>; // overrides específicos p/ dark
+    dark?: Partial<Omit<ThemeTokens, "modes">>; // overrides p/ dark
   };
 };
 
@@ -27,6 +38,14 @@ export const defaultTheme: ThemeTokens = {
   radii,
   spacing,
   typography,
+  transition: {
+    transition: (props, duration = "180ms", easing = "ease") =>
+      (Array.isArray(props) ? props : [props])
+        .map((p) => `${p} ${duration} ${easing}`)
+        .join(", "),
+    durations: { fast: "120ms", normal: "180ms", slow: "240ms" },
+    easing: { standard: "ease", emphasized: "cubic-bezier(.2,.8,.2,1)" },
+  },
 };
 
 export const createTheme = (overrides: Partial<ThemeTokens>): ThemeTokens => {

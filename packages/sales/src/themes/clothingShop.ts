@@ -14,13 +14,13 @@ const clothingLight: ThemeColors = {
 
 const clothingDark: ThemeColors = {
   ...defaultTheme.colors,
-  background: "#050914",
-  surface: "#0B1220",
-  text: "#F8FAFC",
-  mutedText: "#CBD5F5",
-  border: "#1E293B",
-  brand: "#F8FAFC",
-  brandAccent: "#FACC15",
+  background: "#0C0C0C",
+  surface: "#1A1A1A",
+  text: "#F3F3F3",
+  mutedText: "#9CA3AF",
+  border: "#2E2E2E",
+  brand: "#FFFFFF",
+  brandAccent: "#F5F5F5",
 };
 
 export const clothingShopTheme: ThemeTokens = createTheme({

@@ -1,8 +1,11 @@
-import React, { useMemo, useState } from "react";
-import { useTheme } from "@prisma-ui/core";
+import { useMemo, useState } from "react";
+import {
+  useTheme,
+  hexToRgba,
+  buildFocusRing,
+  transition,
+} from "@prisma-ui/core";
 import { Button } from "../atoms/Button";
-import { hexToRgba } from "../../utils/color";
-import { buildFocusRing, transition } from "../../utils/style";
 
 type Suggestion = {
   id: string;
@@ -22,7 +25,7 @@ export function SearchBar({
   value,
   onChange,
   onSearch,
-  placeholder = "Buscar produtos, categorias ou marcas",
+  placeholder = "Buscar produtos",
   suggestions = [],
   loading = false,
 }: SearchBarProps) {

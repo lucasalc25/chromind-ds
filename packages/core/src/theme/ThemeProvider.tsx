@@ -30,7 +30,7 @@ export function ThemeProvider({
 }: ThemeProviderProps) {
   const base = theme || defaultTheme;
 
-  // tema efetivo = base (+ dark overrides, se houver)
+  // tema efetivo = base + dark overrides
   const effective = useMemo(
     () => (mode === "dark" ? mergeTheme(base, base.modes?.dark) : base),
     [base, mode]

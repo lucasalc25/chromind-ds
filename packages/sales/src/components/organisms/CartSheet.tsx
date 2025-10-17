@@ -1,7 +1,5 @@
-import React from "react";
-import { useTheme } from "@prisma-ui/core";
+import { useTheme, hexToRgba } from "@prisma-ui/core";
 import { Drawer, DrawerProps } from "./Drawer";
-import { hexToRgba } from "../../utils/color";
 import { Button } from "../atoms/Button";
 
 export type CartItem = {
@@ -76,7 +74,11 @@ export function CartSheet({
                   <img
                     src={item.image}
                     alt={item.name}
-                    style={{ width: "100%", height: "100%", objectFit: "cover" }}
+                    style={{
+                      width: "100%",
+                      height: "100%",
+                      objectFit: "cover",
+                    }}
                   />
                 ) : (
                   <span style={{ color: colors.mutedText }}>Imagem</span>

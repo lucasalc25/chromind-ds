@@ -1,8 +1,7 @@
 import React, { useEffect } from "react";
 import { createPortal } from "react-dom";
-import { useTheme } from "@prisma-ui/core";
+import { useTheme, hexToRgba } from "@prisma-ui/core";
 import { Button } from "../atoms/Button";
-import { hexToRgba } from "../../utils/color";
 
 export type ToastTone = "brand" | "success" | "warning" | "danger";
 
@@ -68,14 +67,14 @@ export function Toast({
       role="status"
       aria-live="polite"
       style={{
-        minWidth: spacing(64),
-        background: colors.background,
+        minWidth: spacing(68),
+        background: colors.surface,
         borderRadius: radii.lg,
         border: `1px solid ${hexToRgba(accent, 0.4)}`,
         boxShadow: `0 22px 48px ${hexToRgba(colors.text, 0.2)}`,
         padding: spacing(3),
         display: "grid",
-        gap: spacing(2),
+        gap: spacing(4),
         fontFamily: typography.fontFamily,
         position: "relative",
         overflow: "hidden",
@@ -150,7 +149,7 @@ export function Toast({
           onClick={onClose}
           style={{
             minWidth: "auto",
-            padding: `${spacing(1)} ${spacing(1.5)}`,
+            padding: `${spacing(1.5)} ${spacing(2.5)}`,
           }}
         >
           Fechar
@@ -175,7 +174,7 @@ export function Toast({
               height: "100%",
               width: "100%",
               background: accent,
-              animation: `toast-progress ${Math.max(autoDismiss, 500)}ms linear forwards`,
+              animation: `toast-progress ${autoDismiss}ms linear forwards`,
             }}
           />
         </span>

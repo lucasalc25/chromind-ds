@@ -1,7 +1,10 @@
 import React, { useState } from "react";
-import { useTheme } from "@prisma-ui/core";
-import { hexToRgba } from "../../utils/color";
-import { buildFocusRing, transition } from "../../utils/style";
+import {
+  useTheme,
+  hexToRgba,
+  buildFocusRing,
+  transition,
+} from "@prisma-ui/core";
 
 type ButtonTone = "brand" | "neutral" | "success" | "warning" | "danger";
 type ButtonVariant = "solid" | "outline" | "ghost";
@@ -154,6 +157,7 @@ export function Button({
         fontFamily: typography.fontFamily,
         letterSpacing: "-0.01em",
         minHeight: spacing(6),
+        maxHeight: spacing(12),
         width: fullWidth ? "100%" : "auto",
         cursor: disabled ? "not-allowed" : "pointer",
         transform: pressed ? "translateY(1px)" : "translateY(0)",
@@ -203,4 +207,3 @@ export function Button({
     </button>
   );
 }
-

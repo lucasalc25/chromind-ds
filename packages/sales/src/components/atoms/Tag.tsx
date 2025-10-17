@@ -1,5 +1,4 @@
-import { useTheme } from "@prisma-ui/core";
-import { hexToRgba } from "../../utils/color";
+import { useTheme, hexToRgba } from "@prisma-ui/core";
 
 type TagProps = {
   label: string;

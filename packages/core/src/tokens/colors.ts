@@ -7,7 +7,6 @@ export type NeutralColors = {
   success: string;
   warning: string;
   danger: string;
-  // serão adicionadas em temas: brand, brandAccent
 };
 
 export const neutralColors: NeutralColors = {

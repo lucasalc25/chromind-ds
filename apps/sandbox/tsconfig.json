@@ -4,5 +4,5 @@
     "outDir": "dist",
     "types": ["node"]
   },
-  "include": ["src"]
+  "include": ["src", "../../packages/core/src/hooks/useBreakpoints.ts"]
 }

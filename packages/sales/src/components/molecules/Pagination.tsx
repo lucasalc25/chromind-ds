@@ -1,7 +1,4 @@
-import React from "react";
-import { useTheme } from "@prisma-ui/core";
-import { hexToRgba } from "../../utils/color";
-import { transition } from "../../utils/style";
+import { useTheme, hexToRgba, transition } from "@prisma-ui/core";
 
 export type PaginationProps = {
   page: number;
@@ -35,32 +32,44 @@ export function Pagination({
 
   const pages = range(start, end);
 
-  const renderButton = (label: string | number, target: number, disabled = false) => (
-    <button
-      key={`${label}-${target}`}
-      type="button"
-      disabled={disabled}
-      onClick={() => onPageChange(target)}
-      style={{
-        borderRadius: radii.md,
-        border: `1px solid ${hexToRgba(colors.border, 0.9)}`,
-        background:
-          target === clampedPage
-            ? hexToRgba(colors.brandAccent, 0.2)
-            : "transparent",
-        color:
-          target === clampedPage ? colors.brand : hexToRgba(colors.text, 0.8),
-        padding: `${spacing(1)} ${spacing(2)}`,
-        cursor: disabled ? "not-allowed" : "pointer",
-        minWidth: spacing(6),
-        transition: transition(["background", "color", "transform"]),
-        transform: target === clampedPage ? "translateY(-1px)" : "translateY(0)",
-        opacity: disabled ? 0.6 : 1,
-      }}
-    >
-      {label}
-    </button>
-  );
+  const renderButton = (
+    label: string | number,
+    target: number,
+    disabled = false
+  ) => {
+    const isCurrent = typeof label === "number" && target === clampedPage;
+
+    return (
+      <button
+        key={`${label}-${target}`}
+        type="button"
+        disabled={disabled || isCurrent}
+        onClick={() => onPageChange(target)}
+        aria-current={isCurrent ? "page" : undefined}
+        style={{
+          borderRadius: radii.md,
+          border: `1px solid ${
+            isCurrent ? colors.brand : hexToRgba(colors.border, 0.9)
+          }`,
+          background: isCurrent ? colors.brand : "transparent",
+          color: isCurrent ? colors.background : hexToRgba(colors.text, 0.85),
+          padding: `${spacing(1)} ${spacing(2)}`,
+          cursor: disabled || isCurrent ? "not-allowed" : "pointer",
+          minWidth: spacing(6),
+          transition: transition([
+            "background",
+            "color",
+            "transform",
+            "border",
+          ]),
+          transform: isCurrent ? "translateY(-1px)" : "translateY(0)",
+          opacity: disabled ? 0.6 : 1,
+        }}
+      >
+        {label}
+      </button>
+    );
+  };
 
   return (
     <nav aria-label="Paginação">
@@ -68,6 +77,7 @@ export function Pagination({
         style={{
           display: "flex",
           alignItems: "center",
+          justifyContent: "center",
           gap: spacing(1),
         }}
       >
