@@ -1,6 +1,6 @@
 # Prisma UI
 
-**Prisma UI** é um Design System modular e temático baseado em *Atomic Design*, criado por **Lucas Alcântara Holanda** para interfaces de vendas. Combina consistência visual, reuso de componentes e personalização por nicho (brinquedos, pets, roupas, eletrônicos e farmácia, inicialmente).
+**Prisma UI** é um Design System modular e temático baseado em *Atomic Design* para interfaces de vendas. Combina consistência visual, reuso de componentes e personalização de tema por nicho (brinquedos, pets, roupas, eletrônicos e farmácia, inicialmente).
 
 ---
 
