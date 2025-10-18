@@ -106,7 +106,9 @@ export function App() {
 **Lucas Alcântara Holanda** <br>
 Estudante de Ciência da Computação (UNIP) <br>
 Desenvolvedor Front-End e criador do Prisma UI <br>
-🔗 [GitHub](https://github.com/lucasalc25) · [LinkedIn](https://www.linkedin.com/in/lucas-alcantara-holanda) <br>
+
+[![GitHub](https://img.shields.io/badge/GitHub-100000?style=for-the-badge&logo=github&logoColor=white)](https://github.com/lucasalc25)
+[![LinkedIn](https://img.shields.io/badge/LinkedIn-0A66C2?style=for-the-badge&logo=linkedin&logoColor=white)](https://www.linkedin.com/in/lucas-alcantara-holanda)
 
 
 > 🧩 Projeto desenvolvido como parte do Trabalho de Conclusão de Curso  em Ciência da Computação - Universidade Paulista (UNIP), 2025.
