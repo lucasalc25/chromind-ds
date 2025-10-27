@@ -84,8 +84,7 @@ yarn add chromind
 Após a instalação, importe os módulos no seu projeto React:
 
 ```tsx
-import { ThemeProvider, useTheme } from "@chromind/core";
-import { ProductCard, BuyActions } from "@chromind/sales";
+import { ThemeProvider, useTheme, ProductCard, BuyActions } from "chromind";
 
 function App() {
   return (
