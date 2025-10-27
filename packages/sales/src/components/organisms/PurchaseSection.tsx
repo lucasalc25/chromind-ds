@@ -1,11 +1,14 @@
 import { useState } from "react";
-import { QuantityStepper, StockBadge, type Product } from "@prisma-ui/sales";
-import { useTheme } from "@prisma-ui/core";
-import { PriceBox } from "../molecules/PriceBox";
-import { PaymentLink } from "../molecules/PaymentLink";
-import { BuyActions } from "../molecules/BuyActions";
-import { PaymentOptionsModal } from "./PaymentOptionsModal";
-import { ShippingCalculator } from "./ShippingCalculator";
+import type { Product } from "../../types";
+import { StockBadge } from "../atoms";
+import {
+  QuantityStepper,
+  PriceBox,
+  PaymentLink,
+  BuyActions,
+} from "../molecules";
+import { useTheme } from "@chromind/core";
+import { PaymentOptionsModal, ShippingCalculator } from "../organisms";
 
 export function PurchaseSection({
   product,

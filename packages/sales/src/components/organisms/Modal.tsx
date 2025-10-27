@@ -1,6 +1,6 @@
 import React, { useEffect } from "react";
 import { createPortal } from "react-dom";
-import { useTheme, hexToRgba, transition } from "@prisma-ui/core";
+import { useTheme, hexToRgba, transition } from "@chromind/core";
 import { Button } from "../atoms/Button";
 
 export type ModalProps = {
@@ -12,10 +12,10 @@ export type ModalProps = {
 };
 
 const ensureContainer = () => {
-  let container = document.getElementById("prisma-ui-modal-root");
+  let container = document.getElementById("chromind-modal-root");
   if (!container) {
     container = document.createElement("div");
-    container.id = "prisma-ui-modal-root";
+    container.id = "chromind-modal-root";
     document.body.appendChild(container);
   }
   return container;

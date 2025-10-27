@@ -4,7 +4,7 @@ import {
   hexToRgba,
   buildFocusRing,
   transition,
-} from "@prisma-ui/core";
+} from "@chromind/core";
 
 type ButtonTone = "brand" | "neutral" | "success" | "warning" | "danger";
 type ButtonVariant = "solid" | "outline" | "ghost";

@@ -1,4 +1,4 @@
-import { Text, useTheme } from "@prisma-ui/core";
+import { Text, useTheme } from "@chromind/core";
 
 export function PaymentLink({ onOpen }: { onOpen: () => void }) {
   const { colors } = useTheme();

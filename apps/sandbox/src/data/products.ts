@@ -1,4 +1,4 @@
-import type { Product } from "@prisma-ui/sales";
+import type { Product } from "@chromind/sales";
 
 export const products: Product[] = [
   // ========== BRINQUEDOS ==========

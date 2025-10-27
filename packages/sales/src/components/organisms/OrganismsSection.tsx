@@ -1,4 +1,4 @@
-import { Button } from "@prisma-ui/sales";
+import { Button } from "../atoms";
 import {
   ProductGallery,
   AddToCart,
@@ -8,8 +8,8 @@ import {
   Modal,
   Toast,
   ProductGrid,
-} from "@prisma-ui/sales";
-import type { Product } from "@prisma-ui/sales";
+} from "../organisms";
+import type { Product } from "../../types";
 
 type Steps = Array<{
   id: string;
@@ -19,7 +19,7 @@ type Steps = Array<{
 }>;
 type GalleryImage = { id: string; src: string; alt?: string };
 
-type OrganismsProps = {
+type OrganismsSectionProps = {
   galleryImages: GalleryImage[];
   galleryIndex: number;
   onPrevImage: () => void;
@@ -63,7 +63,7 @@ type OrganismsProps = {
   onToggleFavFirst: () => void;
 };
 
-export function Organisms(props: OrganismsProps) {
+export function OrganismsSection(props: OrganismsSectionProps) {
   const {
     galleryImages,
     galleryIndex,

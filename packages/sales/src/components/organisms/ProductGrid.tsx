@@ -1,4 +1,4 @@
-import type { Product } from "@prisma-ui/sales";
+import type { Product } from "../../types";
 import { ProductCard } from "./ProductCard";
 
 export type ProductGridProps = {

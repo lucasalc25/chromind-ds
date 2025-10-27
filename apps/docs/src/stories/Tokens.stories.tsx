@@ -1,4 +1,4 @@
-import { neutralColors, radii, spacing, typography } from "@prisma-ui/core";
+import { neutralColors, radii, spacing, typography } from "@chromind/core";
 
 export default { title: "Core/Tokens" };
 

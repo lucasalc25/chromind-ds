@@ -1,4 +1,4 @@
-import { useTheme } from "@prisma-ui/core";
+import { useTheme } from "@chromind/core";
 import { DiscountBadge } from "./DiscountBadge";
 
 type PriceTagProps = {

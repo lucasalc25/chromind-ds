@@ -1,8 +1,8 @@
 import { useState } from "react";
-import { useTheme, hexToRgba } from "@prisma-ui/core";
+import { useTheme, hexToRgba } from "@chromind/core";
 import { Button } from "../atoms/Button";
 import { ChevronLeft, ChevronRight } from "lucide-react";
-import { useBreakpoints } from "@prisma-ui/core";
+import { useBreakpoints } from "@chromind/core";
 
 export type GalleryImage = { id: string; src: string; alt?: string };
 
@@ -12,6 +12,8 @@ export type ProductGalleryProps = {
   activeIndex?: number;
   onChangeIndex?: (index: number) => void;
   showNav?: boolean;
+  /** Nome do produto para acessibilidade (usado como fallback de alt/texto) */
+  productName?: string;
 };
 
 export function ProductGallery({
@@ -20,6 +22,7 @@ export function ProductGallery({
   activeIndex,
   onChangeIndex,
   showNav = true,
+  productName = "Produto",
 }: ProductGalleryProps) {
   const { ltMd } = useBreakpoints();
   const thumbSize = ltMd ? 56 : 64;
@@ -42,6 +45,14 @@ export function ProductGallery({
   const next = () => setIndex(index + 1);
 
   const active = images[index];
+
+  // Fallbacks de alt acessível
+  const mainAlt =
+    active?.alt?.trim() ||
+    `${productName} - imagem ${Math.min(index + 1, images.length)}`;
+
+  const thumbAlt = (i: number, img: GalleryImage) =>
+    img.alt?.trim() || `${productName} - miniatura ${i + 1}`;
 
   return (
     <div
@@ -80,7 +91,7 @@ export function ProductGallery({
           {active ? (
             <img
               src={active.src}
-              alt={active.alt ?? ""}
+              alt={mainAlt}
               style={{ width: "100%", height: "100%", objectFit: "cover" }}
             />
           ) : (
@@ -107,6 +118,7 @@ export function ProductGallery({
                 key={img.id}
                 type="button"
                 onClick={() => setIndex(i)}
+                aria-label={`Miniatura ${i + 1}`}
                 aria-current={selected ? "true" : undefined}
                 style={{
                   border: `2px solid ${
@@ -124,7 +136,7 @@ export function ProductGallery({
               >
                 <img
                   src={img.src}
-                  alt={img.alt ?? ""}
+                  alt={thumbAlt(i, img)}
                   style={{ width: "100%", height: "100%", objectFit: "cover" }}
                 />
               </button>
@@ -148,16 +160,20 @@ export function ProductGallery({
             onClick={prev}
             disabled={index === 0}
             variant="outline"
+            aria-label="Anterior"
+            title="Anterior"
           >
-            <ChevronLeft />
+            <ChevronLeft aria-hidden="true" />
           </Button>
           <Button
             type="button"
             onClick={next}
             disabled={index === images.length - 1}
             variant="outline"
+            aria-label="Próximo"
+            title="Próximo"
           >
-            <ChevronRight />
+            <ChevronRight aria-hidden="true" />
           </Button>
         </div>
       )}

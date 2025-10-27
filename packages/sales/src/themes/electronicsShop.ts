@@ -3,7 +3,7 @@ import {
   ThemeColors,
   ThemeTokens,
   defaultTheme,
-} from "@prisma-ui/core";
+} from "@chromind/core";
 
 const electronicsLight: ThemeColors = {
   ...defaultTheme.colors,

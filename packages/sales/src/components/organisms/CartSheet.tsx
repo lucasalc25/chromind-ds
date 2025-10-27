@@ -1,4 +1,4 @@
-import { useTheme, hexToRgba } from "@prisma-ui/core";
+import { useTheme, hexToRgba } from "@chromind/core";
 import { Drawer, DrawerProps } from "./Drawer";
 import { Button } from "../atoms/Button";
 

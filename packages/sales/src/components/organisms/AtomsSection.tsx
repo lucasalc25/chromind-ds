@@ -6,11 +6,10 @@ import {
   DiscountBadge,
   PriceTag,
   RatingStars,
-  QuantityStepper,
-  Tooltip,
   FavoriteButton,
-} from "@prisma-ui/sales";
-import { useTheme } from "@prisma-ui/core";
+} from "../atoms";
+import { QuantityStepper, Tooltip } from "../molecules";
+import { useTheme } from "@chromind/core";
 
 type AtomsSectionProps = {
   rating: number;
@@ -20,7 +19,7 @@ type AtomsSectionProps = {
   onToggleFav: () => void;
 };
 
-export function Atoms({
+export function AtomsSection({
   rating,
   qty,
   fav,

@@ -7,3 +7,5 @@ packages/**/dist
 .storybook-out
 *storybook.log
 storybook-static
+packages/**/src/**/*.d.ts
+packages/**/src/**/*.d.ts.map

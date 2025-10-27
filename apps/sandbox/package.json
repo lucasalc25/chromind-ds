@@ -8,8 +8,8 @@
     "preview": "vite preview"
   },
   "dependencies": {
-    "@prisma-ui/core": "workspace:*",
-    "@prisma-ui/sales": "workspace:*",
+    "@chromind/core": "workspace:*",
+    "@chromind/sales": "workspace:*",
     "react": "^18",
     "react-dom": "^18"
   },

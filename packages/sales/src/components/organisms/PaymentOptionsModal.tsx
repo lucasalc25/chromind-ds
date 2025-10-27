@@ -1,5 +1,6 @@
-import { Modal, Button } from "@prisma-ui/sales";
-import { Text, useTheme } from "@prisma-ui/core";
+import { Button } from "../atoms";
+import { Modal } from "../organisms";
+import { Text, useTheme } from "@chromind/core";
 
 export function PaymentOptionsModal({
   open,

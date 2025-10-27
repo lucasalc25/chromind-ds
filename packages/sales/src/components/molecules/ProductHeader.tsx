@@ -1,6 +1,6 @@
-import { FavoriteButton, RatingStars } from "@prisma-ui/sales";
-import type { Product } from "@prisma-ui/sales";
-import { spacing } from "@prisma-ui/core";
+import { FavoriteButton, RatingStars } from "../atoms";
+import type { Product } from "../../types";
+import { spacing } from "@chromind/core";
 
 export function ProductHeader({
   product,

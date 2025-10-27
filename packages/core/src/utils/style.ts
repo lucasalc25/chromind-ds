@@ -1,4 +1,4 @@
-import { ThemeTokens } from "@prisma-ui/core";
+import { ThemeTokens } from "@chromind/core";
 import { hexToRgba } from "./color";
 
 export const buildFocusRing = (color: string, alpha = 0.45) =>

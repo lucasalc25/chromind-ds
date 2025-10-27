@@ -1,5 +1,5 @@
 import React, { useRef, useState } from "react";
-import { useTheme, hexToRgba, transition } from "@prisma-ui/core";
+import { useTheme, hexToRgba, transition } from "@chromind/core";
 
 type TooltipPlacement = "top" | "bottom" | "left" | "right";
 

@@ -1,4 +1,4 @@
-import { useTheme, hexToRgba, transition } from "@prisma-ui/core";
+import { useTheme, hexToRgba, transition } from "@chromind/core";
 
 export type VariantOption = {
   id: string;

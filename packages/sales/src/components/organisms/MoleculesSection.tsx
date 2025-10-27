@@ -6,12 +6,12 @@ import {
   Tabs,
   VariantSelector,
   BrandFilters,
-  ProductCard,
-} from "@prisma-ui/sales";
-import type { Product } from "@prisma-ui/sales";
-import { useBreakpoints } from "@prisma-ui/core";
+} from "../molecules";
+import { ProductCard } from "../organisms";
+import type { Product } from "../../types";
+import { useBreakpoints } from "@chromind/core";
 
-type MoleculesProps = {
+type MoleculesSectionProps = {
   activeTab: string;
   onTabChange: (id: string) => void;
 
@@ -28,7 +28,7 @@ type MoleculesProps = {
   onToggleFavorite: () => void;
 };
 
-export function Molecules({
+export function MoleculesSection({
   activeTab,
   onTabChange,
   selectedVariant,
@@ -40,7 +40,7 @@ export function Molecules({
   demoProduct,
   isFavorite,
   onToggleFavorite,
-}: MoleculesProps) {
+}: MoleculesSectionProps) {
   const [min, max] = priceRange;
   const { ltLg } = useBreakpoints();
   const twoCol = !ltLg;

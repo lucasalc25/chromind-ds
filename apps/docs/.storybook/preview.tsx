@@ -1,5 +1,5 @@
 import type { Preview } from "@storybook/react";
-import { ThemeProvider } from "@prisma-ui/core";
+import { ThemeProvider } from "@chromind/core";
 
 const preview: Preview = {
   decorators: [

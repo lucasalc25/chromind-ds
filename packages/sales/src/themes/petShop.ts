@@ -1,4 +1,4 @@
-import { createTheme, ThemeColors, ThemeTokens, defaultTheme } from "@prisma-ui/core";
+import { createTheme, ThemeColors, ThemeTokens, defaultTheme } from "@chromind/core";
 
 const petShopLight: ThemeColors = {
   ...defaultTheme.colors,

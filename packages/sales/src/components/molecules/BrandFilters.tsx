@@ -1,6 +1,6 @@
 import React from "react";
-import { useTheme } from "@prisma-ui/core";
-import { spacing, typography } from "@prisma-ui/core";
+import { useTheme } from "@chromind/core";
+import { spacing, typography } from "@chromind/core";
 import { Button } from "../atoms/Button";
 
 type Props = {

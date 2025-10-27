@@ -1,4 +1,4 @@
-import { useTheme, hexToRgba } from "@prisma-ui/core";
+import { useTheme, hexToRgba } from "@chromind/core";
 
 type BadgeTone =
   | "brand"
