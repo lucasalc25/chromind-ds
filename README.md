@@ -46,13 +46,11 @@ packages/
   core/        → tokens neutros, ThemeProvider, hooks
   sales/       → temas e componentes específicos (de átomos a templates)
   chromind    → ponto de entrada unificado (reexporta core + sales)
-apps/
-  sandbox/     → demonstração dos componentes e temas (ComponentsGallery)
 ```
 
 ---
 
-## 💡 Uso e aplicação
+## 💡 Aplicação
 
 O Chromind foi pensado para acelerar o desenvolvimento de interfaces comerciais com foco em consistência, estética e personalização temática. Seus componentes podem ser utilizados individualmente ou em conjunto, permitindo que desenvolvedores criem rapidamente catálogos de produtos, páginas detalhadas e fluxos de compra completos, com estilos consistentes e adaptados ao tema de cada nicho.
 
@@ -68,18 +66,14 @@ O Chromind foi pensado para acelerar o desenvolvimento de interfaces comerciais 
 
 ## 🚀 Instalação
 
+Você pode instalar este pacote usando npm ou yarn:
+
 ```bash
-# Clonar o repositório
-git clone https://github.com/lucasalc25/chromind.git
-
-# Instalar dependências
-pnpm install
-
-# Executar o app de demonstração
-pnpm --filter sandbox dev
+pnpm add chromind
 ```
-
-💡 A aplicação sandbox é um ambiente de testes onde é possível visualizar e interagir com todos os componentes e temas do Chromind.
+```bash
+yarn add chromind
+```
 
 > Requer React 18+ e TypeScript.
 
@@ -87,18 +81,21 @@ pnpm --filter sandbox dev
 
 ## ✨ Uso básico
 
-```tsx
-import { ThemeProvider, ProductCard, toyShopTheme } from "@chromind";
+Após a instalação, importe os módulos no seu projeto React:
 
-export function App() {
+```tsx
+import { ThemeProvider, useTheme } from "@chromind/core";
+import { ProductCard, BuyActions } from "@chromind/sales";
+
+function App() {
   return (
-    <ThemeProvider theme={toyShopTheme}>
-      <ProductCard product={mockProduct} />
+    <ThemeProvider>
+      <ProductCard />
+      <BuyActions />
     </ThemeProvider>
   );
 }
 ```
-
 ---
 
 ## 🧑‍💻 Autor
