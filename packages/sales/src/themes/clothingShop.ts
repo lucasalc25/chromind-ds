@@ -3,7 +3,7 @@ import {
   ThemeColors,
   ThemeTokens,
   defaultTheme,
-} from "@prisma-ui/core";
+} from "@chromind/core";
 
 const clothingLight: ThemeColors = {
   ...defaultTheme.colors,

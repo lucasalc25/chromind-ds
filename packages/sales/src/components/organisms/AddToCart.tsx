@@ -1,9 +1,7 @@
-import { useTheme } from "@prisma-ui/core";
-import { PriceTag } from "../atoms/PriceTag";
-import { Button } from "../atoms/Button";
+import { useTheme } from "@chromind/core";
+import { PriceTag, Button, StockBadge } from "../atoms";
 import { QuantityStepper } from "../molecules/QuantityStepper";
-import { StockBadge } from "../atoms/StockBadge";
-import { Product } from "./ProductCard";
+import { Product } from "../../types";
 
 export type AddToCartProps = {
   product: Product;

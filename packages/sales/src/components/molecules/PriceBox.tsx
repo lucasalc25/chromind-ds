@@ -1,5 +1,5 @@
-import { PriceTag } from "@prisma-ui/sales";
-import type { Product } from "@prisma-ui/sales";
+import { PriceTag } from "../atoms/PriceTag";
+import type { Product } from "../../types";
 
 export function PriceBox({
   product,

@@ -1,6 +1,6 @@
 import React, { useEffect } from "react";
 import { createPortal } from "react-dom";
-import { useTheme, hexToRgba } from "@prisma-ui/core";
+import { useTheme, hexToRgba } from "@chromind/core";
 import { Button } from "../atoms/Button";
 
 export type ToastTone = "brand" | "success" | "warning" | "danger";
@@ -16,10 +16,10 @@ export type ToastProps = {
 };
 
 const ensureContainer = () => {
-  let container = document.getElementById("prisma-ui-toast-root");
+  let container = document.getElementById("chromind-toast-root");
   if (!container) {
     container = document.createElement("div");
-    container.id = "prisma-ui-toast-root";
+    container.id = "chromind-toast-root";
     container.style.position = "fixed";
     container.style.right = "24px";
     container.style.bottom = "24px";
@@ -182,10 +182,10 @@ export function Toast({
     </div>
   );
 
-  const animationStyle = document.getElementById("prisma-ui-toast-animation");
+  const animationStyle = document.getElementById("chromind-toast-animation");
   if (!animationStyle) {
     const styleElement = document.createElement("style");
-    styleElement.id = "prisma-ui-toast-animation";
+    styleElement.id = "chromind-toast-animation";
     styleElement.textContent = `
       @keyframes toast-progress {
         from { transform: scaleX(1); transform-origin: left; }

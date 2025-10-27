@@ -1,9 +1,9 @@
 import { useState } from "react";
-import { ProductGallery } from "@prisma-ui/sales";
-import type { Product } from "@prisma-ui/sales";
+import { ProductGallery } from "../organisms";
+import type { Product } from "../../types";
 import { ProductInfoSection } from "../organisms/ProductInfoSection";
 import { PurchaseSection } from "../organisms/PurchaseSection";
-import { useBreakpoints } from "@prisma-ui/core";
+import { useBreakpoints } from "@chromind/core";
 
 type ProductDetailProps = {
   product: Product;

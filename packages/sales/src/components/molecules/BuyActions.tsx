@@ -1,5 +1,5 @@
-import { Button } from "@prisma-ui/sales";
-import { useTheme } from "@prisma-ui/core";
+import { Button } from "../atoms/Button";
+import { useTheme } from "@chromind/core";
 
 export function BuyActions({
   onAddToCart,

@@ -1,9 +1,7 @@
 import React, { useEffect, useMemo, useRef, useState } from "react";
-import { Atoms } from "../organisms/AtomsSection";
-import { Molecules } from "../organisms/MoleculesSection";
-import { Organisms } from "../organisms/OrganismsSection";
-import { useBreakpoints, Text, useTheme } from "@prisma-ui/core";
-import { Product } from "@prisma-ui/sales";
+import { AtomsSection, MoleculesSection, OrganismsSection } from "../organisms";
+import { useBreakpoints, Text, useTheme } from "@chromind/core";
+import { Product } from "../../types";
 
 function Section({
   id,
@@ -92,25 +90,24 @@ export function ComponentsGallery() {
   const [galleryIndex, setGalleryIndex] = useState(0);
 
   const galleryImages = [
-    { id: "g1", src: "/images/toy1.jpg" },
-    { id: "g2", src: "/images/toy2.jpg" },
-    { id: "g3", src: "/images/toy3.jpg" },
+    { id: "g1", src: "/images/toys/toy1.jpg" },
+    { id: "g2", src: "/images/toys/toy2.jpg" },
+    { id: "g3", src: "/images/toys/toy3.jpg" },
   ];
 
   const demoProduct: Product = {
     id: "demo-1",
     niche: "toy-shop",
-    brand: "LEGO",
-    name: "Lego Classic Blocos Criativos 500 peças",
-    description: ["Kit criativo para todas as idades."],
+    name: "Carrinho RC",
+    description: ["Escala 1:16", "Bateria AA"],
     price: 159.9,
     originalPrice: 199.9,
     avaliations: 12,
     rating,
     stock: "em-estoque",
     categories: ["Brinquedos"],
-    images: ["/images/toy2.jpg"],
-    tags: ["Novo", "Popular"],
+    images: ["/images/toys/toy2.jpg"],
+    tags: ["Novo"],
   };
 
   const gridProducts: Product[] = useMemo(
@@ -231,7 +228,7 @@ export function ComponentsGallery() {
             title="Átomos"
             subtitle="Componentes básicos e reutilizáveis."
           >
-            <Atoms
+            <AtomsSection
               rating={rating}
               qty={qty}
               fav={fav}
@@ -246,7 +243,7 @@ export function ComponentsGallery() {
             title="Moléculas"
             subtitle="Combinações simples de átomos e elementos interativos."
           >
-            <Molecules
+            <MoleculesSection
               activeTab={activeTab}
               onTabChange={setActiveTab}
               selectedVariant={selectedVariant}
@@ -275,7 +272,7 @@ export function ComponentsGallery() {
             title="Organismos"
             subtitle="Composições completas: galerias, barras fixas, carrinho, checkout, modais e avisos."
           >
-            <Organisms
+            <OrganismsSection
               galleryImages={galleryImages}
               galleryIndex={galleryIndex}
               onSetImageIndex={(i) => setGalleryIndex(i)}

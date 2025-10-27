@@ -1,4 +1,4 @@
-import { useTheme } from "@prisma-ui/core";
+import { useTheme } from "@chromind/core";
 import { Heart } from "lucide-react";
 
 type FavoriteButtonProps = {

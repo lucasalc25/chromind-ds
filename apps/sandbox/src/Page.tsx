@@ -1,6 +1,6 @@
 // apps/sandbox/src/Page.tsx
 import React from "react";
-import { useTheme } from "@prisma-ui/core";
+import { useTheme } from "@chromind/core";
 
 export const Page: React.FC<React.PropsWithChildren> = ({ children }) => {
   const { colors, typography } = useTheme();

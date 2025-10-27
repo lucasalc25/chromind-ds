@@ -1,6 +1,6 @@
 import React, { useEffect } from "react";
 import { createPortal } from "react-dom";
-import { useTheme, hexToRgba, transition } from "@prisma-ui/core";
+import { useTheme, hexToRgba, transition } from "@chromind/core";
 import { Button } from "../atoms/Button";
 
 type DrawerSide = "left" | "right";
@@ -15,10 +15,10 @@ export type DrawerProps = {
 };
 
 const ensureContainer = () => {
-  let container = document.getElementById("prisma-ui-drawer-root");
+  let container = document.getElementById("chromind-drawer-root");
   if (!container) {
     container = document.createElement("div");
-    container.id = "prisma-ui-drawer-root";
+    container.id = "chromind-drawer-root";
     document.body.appendChild(container);
   }
   return container;

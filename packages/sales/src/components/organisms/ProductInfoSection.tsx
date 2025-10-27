@@ -1,8 +1,6 @@
-import { useTheme } from "@prisma-ui/core";
-import type { Product } from "@prisma-ui/sales";
-import { ProductHeader } from "../molecules/ProductHeader";
-import { VariantSelector } from "@prisma-ui/sales";
-import { ProductInfo } from "../molecules/ProductInfo";
+import { useTheme } from "@chromind/core";
+import type { Product } from "../../types";
+import { ProductHeader, VariantSelector, ProductInfo } from "../molecules";
 
 export function ProductInfoSection({
   product,

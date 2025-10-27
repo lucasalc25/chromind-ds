@@ -4,7 +4,7 @@ import {
   hexToRgba,
   buildFocusRing,
   transition,
-} from "@prisma-ui/core";
+} from "@chromind/core";
 import { Button } from "../atoms/Button";
 
 type Suggestion = {

@@ -1,5 +1,5 @@
 import React from "react";
-import { useTheme, hexToRgba, transition } from "@prisma-ui/core";
+import { useTheme, hexToRgba, transition } from "@chromind/core";
 
 export type TabItem = {
   id: string;

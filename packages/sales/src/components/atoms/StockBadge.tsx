@@ -1,4 +1,4 @@
-import { useTheme, hexToRgba } from "@prisma-ui/core";
+import { useTheme, hexToRgba } from "@chromind/core";
 
 export type StockStatus = "em-estoque" | "poucas-unidades" | "sem-estoque";
 

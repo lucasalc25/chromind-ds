@@ -6,16 +6,16 @@ export default defineConfig({
   plugins: [react()],
   resolve: {
     preserveSymlinks: true,
-    dedupe: ["react", "react-dom", "@prisma-ui/core"],
+    dedupe: ["react", "react-dom", "@chromind/core"],
     alias: {
-      "@prisma-ui/core": path.resolve(
+      "@chromind/core": path.resolve(
         __dirname,
         "../../packages/core/src/index.ts"
       ),
     },
   },
   optimizeDeps: {
-    exclude: ["@prisma-ui/core", "@prisma-ui/sales"],
+    exclude: ["@chromind/core", "@chromind/sales"],
     include: ["react", "react-dom"],
   },
   server: { fs: { allow: ["..", "."] } },

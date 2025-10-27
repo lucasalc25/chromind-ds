@@ -1,5 +1,5 @@
 import { useEffect, useMemo, useState } from "react";
-import { ThemeProvider, Box, Text } from "@prisma-ui/core";
+import { ThemeProvider, Box, Text } from "@chromind/core";
 import {
   ProductGrid,
   SortSelect,
@@ -13,17 +13,17 @@ import {
   ComponentsGallery,
   ProductDetail,
   BrandFilters,
-} from "@prisma-ui/sales";
+} from "@chromind/sales";
 import {
   toyShopTheme,
   petShopTheme,
   clothingShopTheme,
   electronicsShopTheme,
   drugstoreShopTheme,
-} from "@prisma-ui/sales";
+} from "@chromind/sales";
 import { products as catalog } from "./data/products";
 import { Page } from "./Page";
-import { useBreakpoints } from "@prisma-ui/core";
+import { useBreakpoints } from "@chromind/core";
 
 const themes = {
   "toy-shop": toyShopTheme,

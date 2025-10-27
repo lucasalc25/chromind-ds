@@ -1,5 +1,5 @@
-import { useTheme } from "@prisma-ui/core";
-import { Text } from "@prisma-ui/core";
+import { useTheme } from "@chromind/core";
+import { Text } from "@chromind/core";
 
 type ProductInfoProps = {
   name: string;

@@ -4,7 +4,7 @@ import {
   hexToRgba,
   buildFocusRing,
   transition,
-} from "@prisma-ui/core";
+} from "@chromind/core";
 
 export type SortKey = "popular" | "price-asc" | "price-desc" | "rating-desc";
 

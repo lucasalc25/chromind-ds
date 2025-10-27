@@ -11,7 +11,7 @@
     "vite": "^5"
   },
   "dependencies": {
-    "@prisma-ui/core": "workspace:*",
+    "@chromind/core": "workspace:*",
     "react": "^18",
     "react-dom": "^18"
   }

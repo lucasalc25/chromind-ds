@@ -1,6 +1,6 @@
 import { useState } from "react";
-import { Button } from "@prisma-ui/sales";
-import { Text, useTheme } from "@prisma-ui/core";
+import { Button } from "../atoms";
+import { Text, useTheme } from "@chromind/core";
 import { Truck } from "lucide-react";
 
 export function ShippingCalculator() {

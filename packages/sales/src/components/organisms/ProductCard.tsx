@@ -1,25 +1,9 @@
 import { useState } from "react";
-import { useTheme, hexToRgba, transition } from "@prisma-ui/core";
-import { StockStatus } from "../atoms/StockBadge";
+import { useTheme, hexToRgba, transition } from "@chromind/core";
+import { Product } from "../../types";
 import { Tag } from "../atoms/Tag";
 import { AddToCart } from "./AddToCart";
 import { ProductHeader } from "../molecules/ProductHeader";
-
-export type Product = {
-  id: string;
-  niche: string;
-  brand?: string;
-  name: string;
-  description?: string[];
-  price: number;
-  originalPrice?: number;
-  avaliations: number;
-  rating: number;
-  stock: StockStatus;
-  categories: string[];
-  images?: string[];
-  tags?: string[];
-};
 
 type ProductCardProps = {
   product: Product;
